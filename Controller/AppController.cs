@@ -26,7 +26,7 @@ namespace Margin.Modules.ChangeRequest.Controller
     {
 
         [HttpGet]
-        [DnnAuthorize, AllowAnonymous]
+        [AllowAnonymous]
         public HttpResponseMessage MainResources_Get()
         {
             try
@@ -34,6 +34,28 @@ namespace Margin.Modules.ChangeRequest.Controller
                 return Request.CreateResponse(HttpStatusCode.OK, new
                 {
                     resources = MainResources(),
+                });
+            }
+            catch (Exception ex)
+            {
+                Exceptions.LogException(ex);
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, new
+                {
+                    result = "KO",
+                    message = ex.Message
+                });
+            }
+        }
+
+        [HttpGet]
+        [DnnAuthorize]
+        public HttpResponseMessage ChangeRequestResources_Get()
+        {
+            try
+            {
+                return Request.CreateResponse(HttpStatusCode.OK, new
+                {
+                    resources = ChangeRequestResources(),
                 });
             }
             catch (Exception ex)

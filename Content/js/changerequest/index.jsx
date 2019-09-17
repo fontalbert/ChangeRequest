@@ -2,7 +2,15 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 
-class ChangeRequestAdd extends React.Component {
+//Modules
+import LoadingOverlay from '../common/loading-overlay.jsx';
+import MyToastr from "../common/toastr/myToastr.jsx";
+
+
+
+import AppService from '../app/service/app-service.jsx';
+
+class ChangeRequest extends React.Component {
     constructor(props) {
         super(props);
 
@@ -23,30 +31,48 @@ class ChangeRequestAdd extends React.Component {
         if (init) {
             this.setState({
                 loading: true
+            }, () => {
+                //Get the resources from the server
+                AppService.getChangeRequestResources(this.props.api,
+                    //Success function
+                    (resources) => {
+                        this.setState({ resources, loading: false });
+                        //MyToastr.error("You Get the Resources.");
+                    },
+                    //Fails function
+                    (error) => {
+                        this.setState({ loading: false });
+                        MyToastr.error(error);
+                    });
             });
         }
+
     }
 
     render() {
-        
+        console.log("resources: "+ this.state.resources);
         return (
-            <React.Fragment>
-                
-                <a className="btn btn-default" href={this.props.mainUrl}>Add New Change Request</a>
+            <LoadingOverlay status={this.state.loading}>
+                {this.state.resources ?
+                    <React.Fragment>
+                        <MyToastr />
+                        <a className="btn btn-default" href={this.props.mainUrl}>{this.state.resources.btnBack}</a>
+                    </React.Fragment>
 
-            </React.Fragment>
+                    : ''}
+            </LoadingOverlay>
         );
     }
 }
 //Requeired props for Main component
-ChangeRequestAdd.propTypes = {
+ChangeRequest.propTypes = {
     api: PropTypes.string.isRequired,
-    mainurl: PropTypes.string.isRequired
+    mainUrl: PropTypes.string.isRequired
 };
 
 $(document).ready(function () {
     let entryElement = document.getElementById('entry');
     let mainUrl = entryElement.getAttribute('data-mainurl');
     var sfBaseURL = $.ServicesFramework(entryElement.getAttribute('data-moduleid')).getServiceRoot('Margin/ChangeRequest');
-    ReactDOM.render(<ChangeRequestAdd api={sfBaseURL} mainUrl={mainUrl} />, entryElement);
+    ReactDOM.render(<ChangeRequest api={sfBaseURL} mainUrl={mainUrl} />, entryElement);
 });

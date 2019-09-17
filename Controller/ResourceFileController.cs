@@ -42,5 +42,13 @@ namespace Margin.Modules.ChangeRequest.Controller
                                System.Threading.Thread.CurrentThread.CurrentCulture.Name));
         }
 
+        protected string ChangeRequestResources()
+        {
+            return JsonConvert.SerializeObject(
+                               LocalizationProvider.Instance.GetCompiledResourceFile(PortalSettings,
+                               changeRequestFile,
+                               System.Threading.Thread.CurrentThread.CurrentCulture.Name));
+        }
+
     }
 }

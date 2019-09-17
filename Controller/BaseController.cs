@@ -26,6 +26,7 @@ namespace Margin.Modules.ChangeRequest.Controller
     public class BaseController : DnnApiController
     {
         protected string mainFile = "/DesktopModules/Margin/ChangeRequest/App_LocalResources/Main.resx";
+        protected string changeRequestFile = "/DesktopModules/Margin/ChangeRequest/App_LocalResources/ChangeRequest.resx";
 
     }
 }
