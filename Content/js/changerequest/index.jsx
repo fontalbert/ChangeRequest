@@ -65,7 +65,6 @@ class ChangeRequest extends React.Component {
                         <AppContext.Provider value={context}>
                             <ChangeRequestForm  />
                         </AppContext.Provider>
-
                     </React.Fragment> : ''}
             </LoadingOverlay>
         );
