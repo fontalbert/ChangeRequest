@@ -7,6 +7,7 @@ import LoadingOverlay from '../common/loading-overlay.jsx';
 import MyToastr from "../common/toastr/myToastr.jsx";
 
 import AppService from '../app/service/app-service.jsx';
+import AppContext from '../app/context/app-context.jsx';
 
 class ChangeRequest extends React.Component {
     constructor(props) {
@@ -48,13 +49,21 @@ class ChangeRequest extends React.Component {
     }
 
     render() {
+
+        var context = {
+            ...this.props,
+            resources: this.state.resources
+        };
  
         return (
             <LoadingOverlay status={this.state.loading}>
                 {this.state.resources ?
                     <React.Fragment>
                         <MyToastr />
-                        <a className="btn btn-default" href={this.props.mainUrl}>{this.state.resources.btnBack}</a>
+                        <AppContext.Provider value={context}>
+                            <a className="btn btn-default" href={this.props.mainUrl}>{this.state.resources.btnBack}</a>
+                        </AppContext.Provider>
+
                     </React.Fragment>
 
                     : ''}
