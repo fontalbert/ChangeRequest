@@ -178,7 +178,7 @@
     // Return true to include the table, return false to exclude it.
     TableFilter = (Table t) =>
     {
-		if (t.Name.StartsWith("OM_") || t.Name == "Users")
+		if (t.Name.StartsWith("Arv_") || t.Name == "Users")
         {
 			return true;
         }
@@ -202,7 +202,7 @@
         // Example: Exclude any stored procedure in dbo schema with "order" in its name.
         //if(sp.Schema.Equals("dbo", StringComparison.InvariantCultureIgnoreCase) && sp.NameHumanCase.ToLowerInvariant().Contains("order"))
         //    return false;
-		if (sp.Name.StartsWith("OM_"))
+		if (sp.Name.StartsWith("Arv_"))
         {
 			return true;
         }
@@ -219,8 +219,8 @@
     TableRename = (string name, string schema, bool isView) =>
     {
         // Example
-        if (name.StartsWith("OM_"))
-            name = name.Remove(0, 3);
+        if (name.StartsWith("Arv_"))
+            name = name.Remove(0, 4);
         //name = name.Replace("_AB", "");
 
         //if(isView)
@@ -295,8 +295,8 @@
 		// Remove underscores
 		sp.NameHumanCase = sp.NameHumanCase.Replace("_", "");
 
-        if (sp.NameHumanCase.StartsWith("Focus"))
-            return sp.NameHumanCase.Remove(0, 5);
+        if (sp.NameHumanCase.StartsWith("Arv_"))
+            return sp.NameHumanCase.Remove(0, 4);
 		else
 			return sp.NameHumanCase;
     };
