@@ -1,0 +1,94 @@
+<dotnetnuke type="Package" version="5.0">
+  <packages>
+    <package name="Margin.ChangeRequest" type="Module" version="00.00.01">
+      <friendlyName>ChangeRequest</friendlyName>
+      <description>ChangeRequest</description>
+      <owner>
+        <name>Margin</name>
+        <organization>Margin</organization>
+        <url>http://Marginbusiness.solutions/</url>
+        <email>info@Margin.ie</email>
+      </owner>
+      <!--
+      <license src="license.txt" />
+      <releaseNotes src="releasenotes.txt" />
+	  -->
+      <dependencies />
+      <components>
+        <component type="Module">
+          <desktopModule>
+            <moduleName>ChangeRequest</moduleName>
+            <foldername>Margin/ChangeRequest</foldername>
+            <moduleDefinitions>
+              <moduleDefinition>
+                <friendlyName>Margin Module</friendlyName>
+                <defaultCacheTime>-1</defaultCacheTime>
+                <moduleControls>
+                  <moduleControl>
+                    <controlKey />
+                    <controlTitle />
+                    <controlSrc>DesktopModules/Margin/ChangeRequest/WebControls/Main.ascx</controlSrc>
+                    <controlType>View</controlType>
+                  </moduleControl>
+                  <moduleControl>
+                    <controlKey>Edit</controlKey>
+                    <controlTitle>Edit Content</controlTitle>
+                    <controlSrc>DesktopModules/Margin/ChangeRequest/WebControls/Main_Edit.ascx</controlSrc>
+                    <controlType>Edit</controlType>
+                  </moduleControl>
+                  <moduleControl>
+                    <controlKey>Settings</controlKey>
+                    <controlTitle>ChangeRequest Settings</controlTitle>
+                    <controlSrc>DesktopModules/Margin/ChangeRequest/WebControls/Main_Settings.ascx</controlSrc>
+                    <controlType>Edit</controlType>
+                  </moduleControl>
+                </moduleControls>
+              </moduleDefinition>
+            </moduleDefinitions>
+          </desktopModule>
+        </component>
+        <component type="ResourceFile">
+          <resourceFiles>
+            <basePath>DesktopModules\Margin\ChangeRequest</basePath>
+            <resourceFile>
+              <name>resources.zip</name>
+            </resourceFile>
+          </resourceFiles>
+        </component>
+        <component type="Script">
+          <scripts>
+            <basePath>DesktopModules\Margin\ChangeRequest</basePath>
+            <script type="Install">
+              <path>Installation</path>
+              <name>00.00.01.SqlDataProvider</name>
+              <version>00.00.01</version>
+            </script>
+            <script type="Uninstall">
+              <path>Installation</path>
+              <name>Uninstall.SqlDataProvider</name>
+            </script>
+          </scripts>
+        </component>
+        <component type="Assembly">
+          <assemblies>
+            <assembly>
+              <path>bin</path>
+              <name>EntityFramework.dll</name>
+              <version>6.0.0</version>
+            </assembly>
+            <assembly>
+              <path>bin</path>
+              <name>EntityFramework.SqlServer.dll</name>
+              <version>6.0.0</version>
+            </assembly>
+            <assembly>
+              <path>bin</path>
+              <name>Margin.Modules.ChangeRequest.dll</name>
+              <version>0.0.1</version>
+            </assembly>
+          </assemblies>
+        </component>
+      </components>
+    </package>
+  </packages>
+</dotnetnuke>

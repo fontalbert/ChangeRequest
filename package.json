@@ -1,0 +1,36 @@
+{
+  "version": "1.0.0",
+  "name": "asp.net",
+  "private": true,
+  "dependencies": {
+    "react": "16.8.6",
+    "react-dom": "16.8.6",
+    "prop-types": "15.7.2",
+    "react-datetime": "2.14.0",
+    "deep-equal": "1.0.1",
+    "core-js": "2.5.7",
+    "babel-polyfill": "6.26.0",
+    "redux": "4.0.1",
+    "react-redux": "7.0.2",
+    "react-redux-toastr": "7.4.8"
+  },
+  "devDependencies": {
+    "webpack": "4.39.3",
+    "webpack-cli": "3.3.8",
+    "webpack-merge": "4.2.2",
+    "babel-core": "6.26.3",
+    "babel-loader": "7.1.5",
+    "babel-preset-all": "0.0.2",
+    "babel-plugin-transform-object-rest-spread": "6.26.0",
+    "file-loader": "4.0.0",
+    "url-loader": "2.1.0",
+    "node-sass": "4.12.0",
+    "sass-loader": "8.0.0",
+    "css-loader": "2.0.2",
+    "style-loader": "1.0.0"
+  },
+  "scripts": {
+    "webpack-development": "cmd /c webpack --config webpack.config.js --color=always",
+    "webpack-production": "cmd /c webpack --config webpack.prod.config.js --color=always"
+  }
+}

@@ -1,0 +1,7 @@
+﻿[
+  {
+    "outputFile": "module.css",
+    "inputFile": "module.scss",
+    "minify": { "enabled": false }
+  }
+]

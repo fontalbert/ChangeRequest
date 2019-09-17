@@ -1,0 +1,218 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!-- PLEASE NOTE THAT CHANGES TO THIS FILE WILL NOT TAKE AFFECT UNTIL YOU UNLOAD AND RELOAD YOUR PROJECT! -->
+  <!-- PROJECT FILE	
+		<Import Project="$(MSBuildProjectDirectory)\Installation\Project.targets" />
+  -->
+
+  <!-- ********************************************************************************************* -->
+  <!-- Imports and setup -->
+  <Import Project="$(MSBuildExtensionsPath)\MSBuildCommunityTasks\MSBuild.Community.Tasks.Targets" />
+  <Import Project="$(MSBuildExtensionsPath)\MSBuildDotNetNukeTasks\MSBuild.DotNetNuke.Tasks.Targets" />
+  <Target Name="BeforeBuild">
+	<CallTarget Targets="SetVersionInfo" />
+  </Target>
+  <Target Name="AfterBuild">
+    <CallTarget Targets="Release" />
+    <CallTarget Targets="CopyDeployFiles" />
+  </Target>
+  <!-- ********************************************************************************************* -->
+
+  <PropertyGroup>
+    <CompanyName>Margin</CompanyName>
+    <ModuleFolder>Margin\ChangeRequest</ModuleFolder>
+    <ModuleName>ChangeRequest</ModuleName>
+
+    <DotNetNukeDir>$(MSBuildProjectDirectory)\..\..\..</DotNetNukeDir>
+    <InstallDir>$(MSBuildProjectDirectory)\Installation</InstallDir>
+    <BinDir>$(MSBuildProjectDirectory)\bin</BinDir>
+    <AssemblyInfoFile>$(MSBuildProjectDirectory)\Properties\AssemblyInfo.cs</AssemblyInfoFile>
+    <dnnFile>$(InstallDir)\$(ModuleName).dnn</dnnFile>
+  </PropertyGroup>
+
+  <!-- Release Targets -->
+  <Target Name="Release" 
+          Condition="'$(ConfigurationName)'=='Release' and Exists('$(MSBuildExtensionsPath)\MSBuildCommunityTasks\MSBuild.Community.Tasks.Targets')"
+          DependsOnTargets="Setup" >
+    <CallTarget Targets="RemoveZips" />
+    <CallTarget Targets="UpdateComponents" />
+    <CallTarget Targets="ZipInstall" />
+    <!--<CallTarget Targets="ZipSource" />-->
+  </Target>
+
+  <!-- General setup -->
+  <Target Name="Setup">
+
+  </Target>
+
+  <!-- Version Number -->
+  <Target Name="SetVersionInfo" Condition="'$(ConfigurationName)'=='Release' and Exists('$(MSBuildExtensionsPath)\MSBuildCommunityTasks\MSBuild.Community.Tasks.Targets')">
+    <Message Text="MSBUILD: Updating version number ... " Importance="high"></Message>
+    <!-- Obtain Version information from version.txt -->
+    <Version BuildType="None" RevisionType="None" VersionFile="$(InstallDir)\version.txt" StartDate="12/1/2007">
+      <Output TaskParameter="Major" PropertyName="Major" />
+      <Output TaskParameter="Minor" PropertyName="Minor" />
+      <Output TaskParameter="Build" PropertyName="Build" />
+      <Output TaskParameter="Revision" PropertyName="Revision" />
+    </Version>
+    <!-- DNN requires single digits to be prefixed with a zero -->
+    <CreateProperty Value="0$(Major)" Condition="$(Major) &lt;= 9" >
+      <Output TaskParameter="Value" PropertyName="Major" />
+    </CreateProperty>
+    <CreateProperty Value="0$(Minor)" Condition="$(Minor) &lt;= 9" >
+      <Output TaskParameter="Value" PropertyName="Minor" />
+    </CreateProperty>
+    <CreateProperty Value="0$(Build)" Condition="$(Build) &lt;= 9" >
+      <Output TaskParameter="Value" PropertyName="Build" />
+    </CreateProperty>
+    <CreateProperty Value="0$(Revision)" Condition="$(Revision) &lt;= 9" >
+      <Output TaskParameter="Value" PropertyName="Revision" />
+    </CreateProperty>
+
+    <!-- File refs -->
+    <CreateItem Include="$(AssemblyInfoFile)" >
+      <Output TaskParameter="Include" ItemName="ModuleAssemblyInfoFile"/>
+    </CreateItem>
+    <CreateItem Include="$(dnnFile)" >
+      <Output TaskParameter="Include" ItemName="ModulednnFile"/>
+    </CreateItem>
+
+    <!-- Write new version to assemblyinfo file -->
+    <FileUpdate Files="@(ModuleAssemblyInfoFile)" Encoding="ASCII" Regex="AssemblyVersion\(&quot;.*&quot;\)"
+            ReplacementText="AssemblyVersion(&quot;$(Major).$(Minor).$(Build).$(Revision)&quot;)" />
+    <FileUpdate Files="@(ModuleAssemblyInfoFile)" Encoding="ASCII" Regex="AssemblyFileVersion\(&quot;.*&quot;\)"
+            ReplacementText="AssemblyFileVersion(&quot;$(Major).$(Minor).$(Build).$(Revision)&quot;)" />
+    <FileUpdate Files="@(ModulednnFile)" Regex="&lt;package (.*) version=&quot;.*&quot;&gt;"
+            ReplacementText="&lt;package $1 version=&quot;$(Major).$(Minor).$(Build)&quot;&gt;" />
+  </Target>
+
+  <!-- Update DNN components -->
+  <Target Name="UpdateComponents">
+    <Message Text="MSBUILD: Updating DNN Components ... " Importance="high"></Message>
+
+    <CreateItem Include="$(InstallDir)\*.sqldataprovider">
+      <Output TaskParameter="Include" ItemName="scriptFiles" />
+    </CreateItem>
+    <CreateItem Include="$(BinDir)\*.dll">
+      <Output TaskParameter="Include" ItemName="assemblyFiles" />
+    </CreateItem>
+
+    <ScriptComponent ManifestFile="$(dnnFile)"
+                     BasePath="DesktopModules\$(ModuleFolder)"
+                     Path="Installation" Files="@(scriptFiles)">
+    </ScriptComponent>
+    <AssemblyComponent ManifestFile="$(dnnFile)"
+                     Path="bin" Files="@(assemblyFiles)">
+    </AssemblyComponent>
+
+  </Target>
+
+  <!-- Remove previous files -->
+  <Target Name="RemoveZips">
+    <Message Text="MSBUILD: Deleting older install files ... " Importance="high"></Message>
+    <CreateItem Include="$(InstallDir)\$(CompanyName).$(ModuleName).$(Major).$(Minor).$(Build).Source.zip;
+								$(InstallDir)\$(CompanyName).$(ModuleName).$(Major).$(Minor).$(Build).Install.zip;">
+      <Output TaskParameter="Include" ItemName="deleteFiles" />
+    </CreateItem>
+    <Delete ContinueOnError="true" Files="@(deleteFiles)"></Delete>
+  </Target>
+
+  <!-- Install zip file -->
+  <Target Name="ZipInstall">
+    <Message Text="MSBUILD: Creating install zip file ... " Importance="high"></Message>
+    <RemoveDir ContinueOnError="true" Directories="$(InstallDir)\tmp" />
+    <MakeDir Directories="$(InstallDir)\tmp" />
+    <!-- Get files -->
+    <CreateItem
+         Exclude="**\.svn\**;
+            $(MSBuildProjectDirectory)\.git\**;
+            $(MSBuildProjectDirectory)\node_modules\**;
+						$(MSBuildProjectDirectory)\obj\**;
+						$(MSBuildProjectDirectory)\bin\**;
+						$(MSBuildProjectDirectory)\My Project\*.*;
+						$(MSBuildProjectDirectory)\Properties\*.*;
+						$(MSBuildProjectDirectory)\Dependencies\*.*;
+            $(MSBuildProjectDirectory)\packages\**;
+						$(MSBuildProjectDirectory)\Installation\**"
+          Include="$(MSBuildProjectDirectory)\**\*.ascx;
+						$(MSBuildProjectDirectory)\**\*.aspx;
+						$(MSBuildProjectDirectory)\**\*.css;
+						$(MSBuildProjectDirectory)\**\*.xml;
+						$(MSBuildProjectDirectory)\**\*.xslt;
+						$(MSBuildProjectDirectory)\**\*.js;
+					  $(MSBuildProjectDirectory)\**\*.resx;
+						$(MSBuildProjectDirectory)\**\*.rpt;
+						$(MSBuildProjectDirectory)\**\*.gif;
+						$(MSBuildProjectDirectory)\**\*.jpg;
+						$(MSBuildProjectDirectory)\**\*.png;
+						$(MSBuildProjectDirectory)\**\*.rdlc;
+						$(MSBuildProjectDirectory)\**\*.xsd;"
+					>
+      <Output TaskParameter="Include" ItemName="resources" />
+    </CreateItem>
+    <CreateItem Include="$(InstallDir)\resources.zip;
+					$(dnnFile);" >
+      <Output TaskParameter="Include" ItemName="install"/>
+    </CreateItem>
+    <CreateItem Include="$(InstallDir)\*.SqlDataProvider;" >
+      <Output TaskParameter="Include" ItemName="sql"/>
+    </CreateItem>
+    <CreateItem Include="$(BinDir)\*.dll;" >
+      <Output TaskParameter="Include" ItemName="dll"/>
+    </CreateItem>
+
+    <!-- Create resources.zip -->
+    <Zip Files="@(resources)" 
+         WorkingDirectory="$(MSBuildProjectDirectory)"
+         ZipFileName="$(InstallDir)\resources.zip" />
+
+    <!-- Copy installation files to tmp and creates installation zip -->
+    <Copy ContinueOnError="true" SourceFiles="@(install)" DestinationFolder="$(InstallDir)\tmp"></Copy>
+    <Copy ContinueOnError="true" SourceFiles="@(sql)" DestinationFolder="$(InstallDir)\tmp\Installation"></Copy>
+    <Copy ContinueOnError="true" SourceFiles="@(dll)" DestinationFolder="$(InstallDir)\tmp\bin"></Copy>
+
+    <CreateItem Include="$(InstallDir)\tmp\**\*.*">
+      <Output TaskParameter="Include" ItemName="ZipInstallFiles" />
+    </CreateItem>
+    <Zip Files="@(ZipInstallFiles)" WorkingDirectory="$(InstallDir)\tmp"
+         ZipFileName="$(InstallDir)\$(CompanyName).$(ModuleName).$(Major).$(Minor).$(Build).Install.zip" />
+
+    <!-- Cleanup -->
+    <RemoveDir ContinueOnError="true" Directories="$(InstallDir)\tmp" />
+    <Delete Files="$(InstallDir)\resources.zip"></Delete>
+  </Target>
+
+  <!-- Source code zip file -->
+  <Target Name="ZipSource">
+    <Message Text="MSBUILD: Creating source zip file ..." Importance="high"></Message>
+    <!-- zip source code -->
+    <CreateItem 
+          Exclude="**\.svn\**;
+            **\.git\**;
+						$(MSBuildProjectDirectory)\obj\**;
+						$(MSBuildProjectDirectory)\bin\**;
+						$(InstallDir)\$(CompanyName).$(ModuleName).$(Major).$(Minor).$(Build).*.zip"
+          Include="$(MSBuildProjectDirectory)\**\*.*" >
+      <Output TaskParameter="Include" ItemName="ZipSourceFiles" />
+    </CreateItem>
+    <Zip Files="@(ZipSourceFiles)" WorkingDirectory="$(MSBuildProjectDirectory)"
+          ZipFileName="$(InstallDir)\$(CompanyName).$(ModuleName).$(Major).$(Minor).$(Build).Source.zip" />
+  </Target>
+
+  <!-- Copy files to bin folder -->
+  <Target Name="CopyDeployFiles" Condition="Exists('$(MSBuildExtensionsPath)\MSBuildCommunityTasks\MSBuild.Community.Tasks.Targets')">
+    <!-- Copy .pdbs -->
+    <CreateItem Include="$(BinDir)\*.pdb">
+      <Output TaskParameter="Include" ItemName="PDBFile" />
+    </CreateItem>
+    <Copy SourceFiles="@(PDBFile)" DestinationFolder="$(DotNetNukeDir)\bin\" SkipUnchangedFiles="false" ContinueOnError="true" />
+
+    <!-- Copy .dlls -->
+    <CreateItem Include="$(BinDir)\*.dll">
+      <Output TaskParameter="Include" ItemName="DLLFile" />
+    </CreateItem>
+    <Copy SourceFiles="@(DLLFile)" DestinationFolder="$(DotNetNukeDir)\bin\" SkipUnchangedFiles="false" ContinueOnError="true" />
+  </Target>
+</Project>
+
+
