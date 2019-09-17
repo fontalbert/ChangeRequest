@@ -71,7 +71,7 @@ class Main extends React.Component {
 //Requeired props for Main component
 Main.propTypes = {
     api: PropTypes.string.isRequired,
-    changerequestUrl: PropType.string.isRequired
+    changerequestUrl: PropTypes.string.isRequired
 };
 
 $(document).ready(function () {

@@ -9,6 +9,8 @@ import MyToastr from "../common/toastr/myToastr.jsx";
 import AppService from '../app/service/app-service.jsx';
 import AppContext from '../app/context/app-context.jsx';
 
+import ChangeRequestForm from './component/change-request-form.jsx';
+
 class ChangeRequest extends React.Component {
     constructor(props) {
         super(props);
@@ -61,12 +63,10 @@ class ChangeRequest extends React.Component {
                     <React.Fragment>
                         <MyToastr />
                         <AppContext.Provider value={context}>
-                            <a className="btn btn-default" href={this.props.mainUrl}>{this.state.resources.btnBack}</a>
+                            <ChangeRequestForm  />
                         </AppContext.Provider>
 
-                    </React.Fragment>
-
-                    : ''}
+                    </React.Fragment> : ''}
             </LoadingOverlay>
         );
     }
