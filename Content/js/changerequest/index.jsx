@@ -6,8 +6,6 @@ import PropTypes from 'prop-types';
 import LoadingOverlay from '../common/loading-overlay.jsx';
 import MyToastr from "../common/toastr/myToastr.jsx";
 
-
-
 import AppService from '../app/service/app-service.jsx';
 
 class ChangeRequest extends React.Component {
@@ -50,7 +48,7 @@ class ChangeRequest extends React.Component {
     }
 
     render() {
-        console.log("resources: "+ this.state.resources);
+ 
         return (
             <LoadingOverlay status={this.state.loading}>
                 {this.state.resources ?

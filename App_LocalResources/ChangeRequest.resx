@@ -120,7 +120,4 @@
   <data name="btnBack" xml:space="preserve">
     <value>Back to Grid</value>
   </data>
-  <data name="SayHello" xml:space="preserve">
-    <value>Hello Form!!</value>
-  </data>
 </root>
