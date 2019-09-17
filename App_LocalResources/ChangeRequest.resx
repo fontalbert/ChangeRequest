@@ -120,4 +120,28 @@
   <data name="btnBack" xml:space="preserve">
     <value>Back to Grid</value>
   </data>
+  <data name="lblDescription" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="lblImpact" xml:space="preserve">
+    <value>Impact</value>
+  </data>
+  <data name="lblJustification" xml:space="preserve">
+    <value>Justification</value>
+  </data>
+  <data name="lblPriority" xml:space="preserve">
+    <value>Priority</value>
+  </data>
+  <data name="lblRequestBy" xml:space="preserve">
+    <value>RequestBy</value>
+  </data>
+  <data name="lblRequestDate" xml:space="preserve">
+    <value>RequestDate</value>
+  </data>
+  <data name="lblStatus" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="lblTitle" xml:space="preserve">
+    <value>Title</value>
+  </data>
 </root>

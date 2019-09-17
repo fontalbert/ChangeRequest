@@ -8,6 +8,10 @@ import AppContext from '../../app/context/app-context.jsx';
 //Models
 import ChangeRequest from '../model/change-request.jsx';
 
+//Form Control Components
+import TextBox from '../../common/form/textbox.jsx';
+import DateTime from '../../common/form/datetime.jsx';
+import ComboSelector from '../../common/form/combo-selector.jsx';
 
 
 export default class ChangeRequestForm extends React.Component {
@@ -59,10 +63,32 @@ export default class ChangeRequestForm extends React.Component {
                 {this.state.changeRequest ?
                     <form id="editForm" className="row">
                         <div className="col-md-6">
-                            Column 1
+                            <ComboSelector label={this.context.resources.lblStatus} 
+                                options={this.status} onChange={(value) => console.log(value)}
+                            />
+                            <TextBox label={this.context.resources.lblTitle}
+                                onChange={(value) => console.log(value)}
+                            />
+                            <TextBox label={this.context.resources.lblDescription} 
+                                multiline onChange={(value) => console.log(value)}
+                            />
+                            <TextBox label={this.context.resources.lblJustification} 
+                                multiline onChange={(value) => console.log(value)}
+                            />
                         </div>
                         <div className="col-md-6">
-                            Column 2
+                            <TextBox label={this.context.resources.lblImpact} 
+                                multiline onChange={(value) => console.log(value)}
+                            />
+                            <DateTime label={this.context.resources.lblRequestDate}
+                                locale="en-ie" format='Date' onChange={(value) => console.log(value)} 
+                            />
+                            <TextBox label={this.context.resources.lblRequestBy} 
+                                onChange={(value) => console.log(value)}
+                            />
+                            <ComboSelector label={this.context.resources.lblPriority}
+                                options={this.priority} onChange={(value) => console.log(value)} 
+                            />
                         </div>
 
                         <div className="col-md-12">
