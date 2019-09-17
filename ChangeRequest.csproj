@@ -157,6 +157,13 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\MainService.cs" />
+    <Compile Include="WebControls\ChangeRequestManagement.ascx.cs">
+      <DependentUpon>ChangeRequestManagement.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebControls\ChangeRequestManagement.ascx.designer.cs">
+      <DependentUpon>ChangeRequestManagement.ascx</DependentUpon>
+    </Compile>
     <Compile Include="WebControls\Main_Edit.ascx.designer.cs">
       <DependentUpon>Main_Edit.ascx</DependentUpon>
     </Compile>
@@ -194,6 +201,7 @@
     <Content Include="Content\js\common\form\textbox.jsx" />
     <Content Include="Content\js\common\myModal.jsx" />
     <Content Include="Content\js\common\toastr\myToastr.jsx" />
+    <Content Include="Content\js\changerequest\index.jsx" />
     <Content Include="Content\js\main\index.jsx" />
     <Content Include="Content\js\common\loading-overlay.jsx" />
     <Content Include="Data\ModuleContext.tt">
@@ -208,6 +216,7 @@
     <Content Include="Installation\Uninstall.SqlDataProvider" />
     <Content Include="module.scss" />
     <Content Include="package.json" />
+    <Content Include="WebControls\ChangeRequestManagement.ascx" />
     <Content Include="webpack.config.js" />
     <Content Include="webpack.prod.config.js" />
   </ItemGroup>
@@ -221,6 +230,8 @@
     <Content Include="WebControls\Main.ascx" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Content\js\changerequest\grid\" />
+    <Folder Include="Content\js\changerequest\model\" />
     <Folder Include="Content\js\main\grid\" />
     <Folder Include="Content\js\main\model\" />
   </ItemGroup>

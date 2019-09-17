@@ -42,6 +42,12 @@
                     <controlSrc>DesktopModules/Margin/ChangeRequest/WebControls/Main_Settings.ascx</controlSrc>
                     <controlType>Edit</controlType>
                   </moduleControl>
+                  <moduleControl>
+                    <controlKey>changerequest</controlKey>
+                    <controlTitle>Change Request Management</controlTitle>
+                    <controlSrc>DesktopModules/Margin/ChangeRequest/WebControls/ChangeRequestManagement.ascx</controlSrc>
+                    <controlType>Edit</controlType>
+                  </moduleControl>
                 </moduleControls>
               </moduleDefinition>
             </moduleDefinitions>

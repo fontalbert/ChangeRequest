@@ -9,7 +9,8 @@ const SRC_DIR = path.resolve(__dirname, 'Content/js');
 module.exports = {
     mode: "development",
     entry: {
-        main: SRC_DIR + "/main/index.jsx"
+        main: SRC_DIR + "/main/index.jsx",
+        changerequest: SRC_DIR + "/changerequest/index.jsx"
     },
     output: {
         path: SRC_DIR + '/bundles',

@@ -2,6 +2,10 @@
   <files>
     <file>
       <path>WebControls/</path>
+      <name>ChangeRequestManagement.ascx</name>
+    </file>
+    <file>
+      <path>WebControls/</path>
       <name>Main.ascx</name>
     </file>
     <file>
@@ -41,6 +45,10 @@
       <name>webpack.prod.config.js</name>
     </file>
     <file>
+      <path>App_LocalResources/</path>
+      <name>Main.resx</name>
+    </file>
+    <file>
       <path>WebControls/App_LocalResources/</path>
       <name>Edit.ascx.resx</name>
     </file>
@@ -67,10 +75,6 @@
     <file>
       <path>WebControls/App_LocalResources/</path>
       <name>View.ascx.resx</name>
-    </file>
-    <file>
-      <path>App_LocalResources/</path>
-      <name>Main.resx</name>
     </file>
   </files>
 </dotnetnuke>

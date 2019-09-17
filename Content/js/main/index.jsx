@@ -61,6 +61,7 @@ class Main extends React.Component {
                         <MyToastr />
                         <AppContext.Provider value={context}>
                             <h1>{this.state.resources.SayHello}</h1>
+                            <a className="btn btn-default" href={this.props.changerequestUrl}>Add New Change Request</a>
                         </AppContext.Provider>
                     </React.Fragment> : ''}
             </LoadingOverlay>
@@ -69,11 +70,13 @@ class Main extends React.Component {
 }
 //Requeired props for Main component
 Main.propTypes = {
-    api: PropTypes.string.isRequired
+    api: PropTypes.string.isRequired,
+    changerequestUrl: PropType.string.isRequired
 };
 
 $(document).ready(function () {
     let entryElement = document.getElementById('entry');
+    let changerequestUrl = entryElement.getAttribute('data-changerequesturl');
     var sfBaseURL = $.ServicesFramework(entryElement.getAttribute('data-moduleid')).getServiceRoot('Margin/ChangeRequest');
-    ReactDOM.render(<Main api={sfBaseURL} />, entryElement);
+    ReactDOM.render(<Main api={sfBaseURL} changerequestUrl={changerequestUrl}  />, entryElement);
 });
