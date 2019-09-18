@@ -15,13 +15,13 @@ export default class ChangeRequestService {
     }
 
     static get(api, id, success, fails) {
-        console.log("Edit: " + id);
-        //$.get(`${api}ChangeRequest/Get`, id).done((response) => {
-        //    success(response.changerequest);
-        //}).fail((error) => {
-        //    //console.log(error.responseJSON.Message);
-        //    fails(error.responseJSON.Message);
-        //});
+        //console.log("Edit: " + id);
+        $.get(`${api}ChangeRequest/Get`, id).done((response) => {
+            success(response.changerequest);
+        }).fail((error) => {
+            //console.log(error.responseJSON.Message);
+            fails(error.responseJSON.Message);
+        });
     }
 
 }

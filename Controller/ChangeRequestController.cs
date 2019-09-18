@@ -49,5 +49,30 @@ namespace Margin.Modules.ChangeRequest.Controller
                 });
             }
         }
+
+        [HttpPost]
+        [DnnAuthorize]
+        public HttpResponseMessage Get(int id)
+        {
+            try
+            {
+                var changerequest = ChangeRequestService.Get(id);
+
+                return Request.CreateResponse(HttpStatusCode.OK, new
+                {
+                    result = "OK",
+                    changerequest
+                });
+            }
+            catch (Exception ex)
+            {
+                Exceptions.LogException(ex);
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, new
+                {
+                    result = "KO",
+                    message = ex.Message
+                });
+            }
+        }
     }
 }

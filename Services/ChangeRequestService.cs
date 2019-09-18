@@ -64,6 +64,27 @@ namespace Margin.Modules.ChangeRequest.Services
             }
         }
 
+        public static ChangeRequestDTO Get(int id)
+        {
+            ChangeRequestDTO changerequest = new ChangeRequestDTO(); 
+            using (var ctx = new ModuleContext())
+            {
+                 changerequest = ctx.ChangeRequest.Where((x) => x.Id == id).Select(o => new ChangeRequestDTO {
+                     Id = o.Id,
+                     Title = o.Title,
+                     Description = o.Description,
+                     Justification = o.Justification,
+                     Impact = o.Impact,
+                     Status = o.Status,
+                     Priority = o.Priority,
+                     RequestDate = o.RequestDate.ToString("dd/MM/yyyy"),
+                     RequestBy = o.RequestBy
+                 }).FirstOrDefault();
+
+            }
+            return changerequest;
+        }
+
         public static void Delete(ChangeRequestDTO obj)
         {
             using (var ctx = new ModuleContext())

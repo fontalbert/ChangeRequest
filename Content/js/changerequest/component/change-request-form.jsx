@@ -63,9 +63,9 @@ export default class ChangeRequestForm extends React.Component {
         if (componentDidMount) {
             if (this.context.changeRequestId) {
                 ChangeRequestService.get(this.context.api, this.context.changeRequestId,
-                    (success) => {
+                    (obj) => {
                         console.log(success);
-                        this.setState({ restartForm: this.state.restartForm + 1 });
+                        this.setState({ changeRequest: ChangeRequest.Create(obj) });
                     },
                     (fails) => console.log(fails)
                 );
