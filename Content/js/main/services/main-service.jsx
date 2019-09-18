@@ -10,4 +10,14 @@ export default class MainService {
         });
     }
 
+    static deleteChangeRequest(api, obj, success, fails) {
+
+        $.post(`${api}Main/DeleteChangeRequest`, obj).done((response) => {
+            success(response.result);
+        }).fail((error) => {
+            //console.log(error.responseJSON.Message);
+            fails(error.responseJSON.Message);
+        });
+    }
+
 }

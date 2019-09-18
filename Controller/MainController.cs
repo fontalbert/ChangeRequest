@@ -3,6 +3,7 @@ using DotNetNuke.Entities.Users;
 using DotNetNuke.Services.Exceptions;
 using DotNetNuke.Services.Localization;
 using DotNetNuke.Web.Api;
+using Margin.Modules.ChangeRequest.Data;
 using Margin.Modules.ChangeRequest.Services;
 using System;
 using System.Collections.Generic;
@@ -37,6 +38,30 @@ namespace Margin.Modules.ChangeRequest.Controller
                 {
                     result = "OK",
                     list
+                });
+            }
+            catch (Exception ex)
+            {
+                Exceptions.LogException(ex);
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, new
+                {
+                    result = "KO",
+                    message = ex.Message
+                });
+            }
+        }
+
+        [HttpPost]
+        [DnnAuthorize]
+        public HttpResponseMessage DeleteChangeRequest(ChangeRequestDTO obj)
+        {
+            try
+            {
+                ChangeRequestService.Delete(obj);
+
+                return Request.CreateResponse(HttpStatusCode.OK, new
+                {
+                    result = "OK"
                 });
             }
             catch (Exception ex)

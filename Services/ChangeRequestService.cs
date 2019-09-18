@@ -64,6 +64,17 @@ namespace Margin.Modules.ChangeRequest.Services
             }
         }
 
+        public static void Delete(ChangeRequestDTO obj)
+        {
+            using (var ctx = new ModuleContext())
+            {
+                Data.ChangeRequest o = ctx.ChangeRequest.Where((x) => x.Id == obj.Id).FirstOrDefault();
+
+                ctx.ChangeRequest.Remove(o);
+
+                ctx.SaveChanges();
+            }
+        }
 
         public static List<ChangeRequestDTO> List()
         {

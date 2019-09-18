@@ -47,21 +47,35 @@ class Main extends React.Component {
                         this.setState({ loading: false });
                         MyToastr.error(error);
                     });
-
-                MainService.getList(this.props.api,
-                    //Success function
-                    (list) => this.setState({ list }),
-                    //Fails function
-                    (error) => {
-                        MyToastr.error(error);
-                    });
             });
         }
+
+        MainService.getList(this.props.api,
+            //Success function
+            (list) => this.setState({ list }),
+            //Fails function
+            (error) => {
+                MyToastr.error(error);
+            });
     }
 
     handleDelete(obj) {
-        console.log("Delete:");
-        console.log(obj);
+        
+        var r = confirm(this.state.resources.txtDeleteConfirm);
+        if (r === true) {
+            
+            MainService.deleteChangeRequest(this.props.api, obj,
+                //Success function
+                (message) => { 
+                    this.load(false);
+                },
+                //Fails function
+                (error) => {
+                    this.setState({ loading: false });
+                    MyToastr.error(error);
+                });
+
+        }
     }
 
     handleEdit(obj) {
