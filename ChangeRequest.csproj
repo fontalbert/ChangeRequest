@@ -193,7 +193,7 @@
     <Content Include="Content\js\app\service\app-service.jsx" />
     <Content Include="Content\js\changerequest\component\change-request-form.jsx" />
     <Content Include="Content\js\changerequest\model\change-request.jsx" />
-    <Content Include="Content\js\changerequest\service\change-request-service.jsx" />
+    <Content Include="Content\js\changerequest\services\change-request-service.jsx" />
     <Content Include="Content\js\common\form\btngroup-textbox.jsx" />
     <Content Include="Content\js\common\form\checkbox.jsx" />
     <Content Include="Content\js\common\form\combo-selector.jsx" />

@@ -10,7 +10,7 @@ import MyToastr from "../common/toastr/myToastr.jsx";
 import AppService from '../app/service/app-service.jsx';
 import AppContext from '../app/context/app-context.jsx';
 
-import ChangeRequestService from './service/change-request-service.jsx';
+import ChangeRequestService from './services/change-request-service.jsx';
 
 //Form Components
 import ChangeRequestForm from './component/change-request-form.jsx';
@@ -70,7 +70,6 @@ class ChangeRequest extends React.Component {
         if (this.parsley.isValid() && obj) {
             ChangeRequestService.save(this.props.api, obj, (message) => console.log(message));
         }
-
     }
 
     render() {
