@@ -50,6 +50,13 @@ export default class ChangeRequestForm extends React.Component {
         this.load(true);
     }
 
+    componentDidUpdate(prevProps) {
+        // Typical usage (don't forget to compare props):
+        if (this.props.restartForm !== prevProps.restartForm) {
+            this.load(true);
+        }
+    }
+
     load(componentDidMount) {
         if (componentDidMount) {
             this.setState({
@@ -73,7 +80,8 @@ export default class ChangeRequestForm extends React.Component {
                                             ...this.state.changeRequest,
                                             Status: value
                                         }
-                                })}
+                                    })}
+                                value={this.state.changeRequest.Status}
                             />
                             <TextBox label={this.context.resources.lblTitle} required
                                 onChange={(value) => this.setState({
@@ -82,6 +90,7 @@ export default class ChangeRequestForm extends React.Component {
                                         Title: value
                                     }
                                 })}
+                                value={this.state.changeRequest.Title}
                             />
                             <TextBox label={this.context.resources.lblDescription} 
                                 multiline onChange={(value) => this.setState({
@@ -90,6 +99,7 @@ export default class ChangeRequestForm extends React.Component {
                                         Description: value
                                     }
                                 })}
+                                value={this.state.changeRequest.Description}
                             />
                             <TextBox label={this.context.resources.lblJustification} 
                                 multiline onChange={(value) => this.setState({
@@ -98,6 +108,7 @@ export default class ChangeRequestForm extends React.Component {
                                         Justification: value
                                     }
                                 })}
+                                value={this.state.changeRequest.Justification}
                             />
                         </div>
                         <div className="col-md-6">
@@ -108,6 +119,7 @@ export default class ChangeRequestForm extends React.Component {
                                         Impact: value
                                     }
                                 })}
+                                value={this.state.changeRequest.Impact}
                             />
                             <DateTime label={this.context.resources.lblRequestDate} required
                                 locale="en-ie" format='Date' onChange={(value) => this.setState({
@@ -116,6 +128,7 @@ export default class ChangeRequestForm extends React.Component {
                                         RequestDate: value
                                     }
                                 })} 
+                                value={this.state.changeRequest.RequestDate}
                             />
                             <TextBox label={this.context.resources.lblRequestBy} required
                                 onChange={(value) => this.setState({
@@ -124,6 +137,7 @@ export default class ChangeRequestForm extends React.Component {
                                         RequestBy: value
                                     }
                                 })}
+                                value={this.state.changeRequest.RequestBy}
                             />
                             <ComboSelector label={this.context.resources.lblPriority} required
                                 options={this.priority} onChange={(value) => this.setState({
@@ -132,6 +146,7 @@ export default class ChangeRequestForm extends React.Component {
                                         Priority: value
                                     }
                                 })} 
+                                value={this.state.changeRequest.Priority}
                             />
                         </div>
 

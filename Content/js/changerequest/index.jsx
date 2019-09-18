@@ -23,7 +23,9 @@ class ChangeRequest extends React.Component {
 
         this.state = {
             loading: false,
-            resources: null
+            resources: null,
+            //We have this state as int to ensure it always refreshes and is different from the previous value
+            restartForm: 1 
         };
 
         // 'this' bindings
@@ -68,7 +70,13 @@ class ChangeRequest extends React.Component {
 
         //if it is valid then we can continue
         if (this.parsley.isValid() && obj) {
-            ChangeRequestService.save(this.props.api, obj, (message) => console.log(message));
+            ChangeRequestService.save(this.props.api, obj,
+                (success) => {
+                    console.log(success);
+                    this.setState({ restartForm: this.state.restartForm + 1 });
+                },
+                (fails) => console.log(fails)
+            );
         }
     }
 
@@ -85,7 +93,7 @@ class ChangeRequest extends React.Component {
                     <React.Fragment>
                         <MyToastr />
                         <AppContext.Provider value={context}>
-                            <ChangeRequestForm onSave={(changerequest) => this.handlerSave(changerequest)} />
+                            <ChangeRequestForm restartForm={this.state.restartForm} onSave={(changerequest) => this.handlerSave(changerequest)} />
                         </AppContext.Provider>
                     </React.Fragment> : ''}
             </LoadingOverlay>
