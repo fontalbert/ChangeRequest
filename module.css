@@ -96,3 +96,12 @@
   left: 5vw !important;
   margin-left: 0 !important;
   width: 95vw !important; }
+
+input.parsley-error, select.parsley-error, textarea.parsley-error {
+  border-color: darkred; }
+
+.parsley-errors-list {
+  color: darkred;
+  font-size: 0.8em; }
+  .parsley-errors-list li {
+    list-style: none; }

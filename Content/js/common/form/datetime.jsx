@@ -30,7 +30,9 @@ export default class DateTime extends React.Component {
             <div className="form-group">
                 {this.props.label ?
                     <label className="control-label">{this.props.label}</label> : ''}
-                <Datetime dateFormat={dateFormat} timeFormat={timeFormat} onChange={(date) => this.props.onChange(date)} value={this.props.value} inputProps={{ readOnly: true, "data-parsley-required": (this.props.required === true) }} />
+                <Datetime dateFormat={dateFormat} timeFormat={timeFormat} locale="en-ie"
+                    onChange={(date) => this.props.onChange(date)} value={this.props.value}
+                    inputProps={{ readOnly: true, "data-parsley-required": (this.props.required === true) }} />
             </div>
         );
     }
@@ -40,5 +42,7 @@ export default class DateTime extends React.Component {
 DateTime.propTypes = {
     label: PropTypes.string,
     onChange: PropTypes.func.isRequired,
-    value: PropTypes.string
+    value: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.object])
 };

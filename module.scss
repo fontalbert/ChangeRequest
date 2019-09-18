@@ -156,3 +156,22 @@
     width: 95vw !important;
 }
 
+
+//---------------------------------------
+// Start Parsley Styles
+input.parsley-error, select.parsley-error, textarea.parsley-error {
+    border-color: darkred;
+}
+
+.parsley-errors-list {
+    color: darkred;
+    font-size: 0.8em;
+
+    li {
+        list-style: none;
+    }
+}
+//End Parsley Styles
+//---------------------------------------
+
+
