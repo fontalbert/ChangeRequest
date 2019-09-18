@@ -108,7 +108,22 @@ ChangeRequest.propTypes = {
 
 $(document).ready(function () {
     let entryElement = document.getElementById('entry');
+    let changeRequestId = getParameterByName("id");
     let mainUrl = entryElement.getAttribute('data-mainurl');
     var sfBaseURL = $.ServicesFramework(entryElement.getAttribute('data-moduleid')).getServiceRoot('Margin/ChangeRequest');
-    ReactDOM.render(<ChangeRequest api={sfBaseURL} mainUrl={mainUrl} />, entryElement);
+    ReactDOM.render(<ChangeRequest api={sfBaseURL} mainUrl={mainUrl} changeRequestId={changeRequestId} />, entryElement);
 });
+
+
+function getParameterByName(name, url) {
+    
+    if (!url) url = window.location.href;
+
+    console.log(url);
+    name = name.replace(/[\[\]]/g, '\\$&');
+    var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, ' '));
+}

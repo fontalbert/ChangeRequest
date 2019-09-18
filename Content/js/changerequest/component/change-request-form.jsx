@@ -6,6 +6,8 @@ import MyToastr from '../../common/toastr/myToastr.jsx';
 import AppContext from '../../app/context/app-context.jsx';
 
 
+import ChangeRequestService from '../services/change-request-service.jsx';
+
 //Models
 import ChangeRequest from '../model/change-request.jsx';
 
@@ -59,9 +61,20 @@ export default class ChangeRequestForm extends React.Component {
 
     load(componentDidMount) {
         if (componentDidMount) {
-            this.setState({
-                changeRequest: new ChangeRequest()
-            });
+            if (this.context.changeRequestId) {
+                ChangeRequestService.get(this.context.api, this.context.changeRequestId,
+                    (success) => {
+                        console.log(success);
+                        this.setState({ restartForm: this.state.restartForm + 1 });
+                    },
+                    (fails) => console.log(fails)
+                );
+            }
+            else {
+                this.setState({
+                    changeRequest: new ChangeRequest()
+                });
+            }
         }
     }
 
@@ -92,7 +105,7 @@ export default class ChangeRequestForm extends React.Component {
                                 })}
                                 value={this.state.changeRequest.Title}
                             />
-                            <TextBox label={this.context.resources.lblDescription} 
+                            <TextBox label={this.context.resources.lblDescription}
                                 multiline onChange={(value) => this.setState({
                                     changeRequest: {
                                         ...this.state.changeRequest,
@@ -101,7 +114,7 @@ export default class ChangeRequestForm extends React.Component {
                                 })}
                                 value={this.state.changeRequest.Description}
                             />
-                            <TextBox label={this.context.resources.lblJustification} 
+                            <TextBox label={this.context.resources.lblJustification}
                                 multiline onChange={(value) => this.setState({
                                     changeRequest: {
                                         ...this.state.changeRequest,
@@ -112,7 +125,7 @@ export default class ChangeRequestForm extends React.Component {
                             />
                         </div>
                         <div className="col-md-6">
-                            <TextBox label={this.context.resources.lblImpact} 
+                            <TextBox label={this.context.resources.lblImpact}
                                 multiline onChange={(value) => this.setState({
                                     changeRequest: {
                                         ...this.state.changeRequest,
@@ -127,7 +140,7 @@ export default class ChangeRequestForm extends React.Component {
                                         ...this.state.changeRequest,
                                         RequestDate: value
                                     }
-                                })} 
+                                })}
                                 value={this.state.changeRequest.RequestDate}
                             />
                             <TextBox label={this.context.resources.lblRequestBy} required
@@ -145,7 +158,7 @@ export default class ChangeRequestForm extends React.Component {
                                         ...this.state.changeRequest,
                                         Priority: value
                                     }
-                                })} 
+                                })}
                                 value={this.state.changeRequest.Priority}
                             />
                         </div>

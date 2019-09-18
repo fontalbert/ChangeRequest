@@ -79,8 +79,7 @@ class Main extends React.Component {
     }
 
     handleEdit(obj) {
-        console.log("Edit:");
-        console.log(obj);
+        window.location = this.props.changerequestUrl + "?id="+ obj.Id;
     }
 
     render() {
@@ -105,7 +104,7 @@ class Main extends React.Component {
         );
     }
 }
-//Requeired props for Main component
+//Required props for Main component
 Main.propTypes = {
     api: PropTypes.string.isRequired,
     changerequestUrl: PropTypes.string.isRequired
