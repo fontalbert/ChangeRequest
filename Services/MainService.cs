@@ -10,9 +10,5 @@ namespace Margin.Modules.ChangeRequest.Services
     public class MainService
     {
 
-        private static List<SampleDTO> GetSampleList()
-        {
-            return new List<SampleDTO>();
-        }
     }
 }

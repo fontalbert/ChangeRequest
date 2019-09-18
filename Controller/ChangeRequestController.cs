@@ -3,6 +3,8 @@ using DotNetNuke.Entities.Users;
 using DotNetNuke.Services.Exceptions;
 using DotNetNuke.Services.Localization;
 using DotNetNuke.Web.Api;
+using Margin.Modules.ChangeRequest.Data;
+using Margin.Modules.ChangeRequest.Services;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -22,14 +24,16 @@ using System.Xml;
 
 namespace Margin.Modules.ChangeRequest.Controller
 {
-    public class MainController : DnnApiController
+    public class ChangeRequestController : DnnApiController
     {
-        [HttpGet]
+        [HttpPost]
         [DnnAuthorize]
-        public HttpResponseMessage Start(int userId)
+        public HttpResponseMessage Save(ChangeRequestDTO obj)
         {
             try
             {
+                ChangeRequestService.Save(obj);
+
                 return Request.CreateResponse(HttpStatusCode.OK, new
                 {
                     result = "OK"
