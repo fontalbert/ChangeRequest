@@ -63,5 +63,29 @@ namespace Margin.Modules.ChangeRequest.Services
                 }
             }
         }
+
+
+        public static List<ChangeRequestDTO> List()
+        {
+            List<ChangeRequestDTO> list = new List<ChangeRequestDTO>();
+            using (var ctx = new ModuleContext())
+            {
+                list = ctx.ChangeRequest.ToList().Select((o) => new ChangeRequestDTO
+                {
+                    Id = o.Id,
+                    Title = o.Title,
+                    Description = o.Description,
+                    Justification = o.Justification,
+                    Impact = o.Impact,
+                    Status = o.Status,
+                    Priority = o.Priority,
+                    RequestDate = o.RequestDate.ToString("dd/MM/yyyy"),
+                    RequestBy = o.RequestBy
+                }).ToList();
+            }
+
+            return list;
+        }
+
     }
 }

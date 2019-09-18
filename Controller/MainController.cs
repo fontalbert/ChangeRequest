@@ -3,6 +3,7 @@ using DotNetNuke.Entities.Users;
 using DotNetNuke.Services.Exceptions;
 using DotNetNuke.Services.Localization;
 using DotNetNuke.Web.Api;
+using Margin.Modules.ChangeRequest.Services;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -25,14 +26,17 @@ namespace Margin.Modules.ChangeRequest.Controller
     public class MainController : DnnApiController
     {
         [HttpGet]
-        [DnnAuthorize]
-        public HttpResponseMessage Start(int userId)
+        [AllowAnonymous]
+        public HttpResponseMessage List()
         {
             try
             {
+                var list = ChangeRequestService.List();
+
                 return Request.CreateResponse(HttpStatusCode.OK, new
                 {
-                    result = "OK"
+                    result = "OK",
+                    list
                 });
             }
             catch (Exception ex)

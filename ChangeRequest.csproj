@@ -159,7 +159,6 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ChangeRequestService.cs" />
-    <Compile Include="Services\MainService.cs" />
     <Compile Include="WebControls\ChangeRequestManagement.ascx.cs">
       <DependentUpon>ChangeRequestManagement.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -279,8 +278,11 @@
     <Content Include="Content\js\libraries\parsleyjs\i18n\zh_cn.js" />
     <Content Include="Content\js\libraries\parsleyjs\i18n\zh_tw.js" />
     <Content Include="Content\js\libraries\parsleyjs\parsley.min.js" />
+    <Content Include="Content\js\main\components\change-request-row.jsx" />
+    <Content Include="Content\js\main\components\change-request-grid.jsx" />
     <Content Include="Content\js\main\index.jsx" />
     <Content Include="Content\js\common\loading-overlay.jsx" />
+    <Content Include="Content\js\main\services\main-service.jsx" />
     <Content Include="Data\ModuleContext.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ModuleContext.cs</LastGenOutput>
@@ -306,10 +308,7 @@
     <Content Include="WebControls\Main_Settings.ascx" />
     <Content Include="WebControls\Main.ascx" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Content\js\main\grid\" />
-    <Folder Include="Content\js\main\model\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="compilerconfig.json" />
     <Content Include="compilerconfig.json.bindings" />
