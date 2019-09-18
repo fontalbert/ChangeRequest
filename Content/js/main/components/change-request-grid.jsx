@@ -29,11 +29,12 @@ export default class ChangeRequestGrid extends React.Component {
                         <th>Priority</th>
                         <th>Request Date</th>
                         <th>Request By</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                     {this.props.list ?
-                        this.props.list.map((x) => <ChangeRequestRow value={x} />)
+                        this.props.list.map((x) => <ChangeRequestRow value={x} onEditRow={(obj) => this.props.onEdit(obj)} onDeleteRow={(obj) => this.props.onDelete(obj)} />)
                         : ''}
                 </tbody>
             </table>

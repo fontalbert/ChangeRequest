@@ -26,7 +26,8 @@ class Main extends React.Component {
         };
 
         // 'this' bindings
-
+        this.handleEdit = this.handleEdit.bind(this);
+        this.handleDelete = this.handleDelete.bind(this);
     }
 
     componentDidMount() {
@@ -58,6 +59,16 @@ class Main extends React.Component {
         }
     }
 
+    handleDelete(obj) {
+        console.log("Delete:");
+        console.log(obj);
+    }
+
+    handleEdit(obj) {
+        console.log("Edit:");
+        console.log(obj);
+    }
+
     render() {
         const { loading } = this.state;
         var context = {
@@ -73,7 +84,7 @@ class Main extends React.Component {
                         <MyToastr />
                         <AppContext.Provider value={context}>
                             <a className="btn btn-default" href={this.props.changerequestUrl}>Add New Change Request</a>
-                            <ChangeRequestGrid list={this.state.list} />
+                            <ChangeRequestGrid list={this.state.list} onEdit={(obj) => this.handleEdit(obj)} onDelete={(obj) => this.handleDelete(obj)} />
                         </AppContext.Provider>
                     </React.Fragment> : ''}
             </LoadingOverlay>
