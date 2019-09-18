@@ -6,3 +6,4 @@
 
 <dnn:DnnJsInclude runat="server" FilePath="/DesktopModules/Margin/ChangeRequest/Content/js/bundles/vendor.js" />
 <dnn:DnnJsInclude runat="server" FilePath="/DesktopModules/Margin/ChangeRequest/Content/js/bundles/changerequest.js" />
+<dnn:DnnJsInclude runat="server" FilePath="/DesktopModules/Margin/ChangeRequest/Content/js/libraries/parsleyjs/parsley.min.js" />

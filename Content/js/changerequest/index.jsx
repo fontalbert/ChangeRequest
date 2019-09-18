@@ -6,14 +6,20 @@ import PropTypes from 'prop-types';
 import LoadingOverlay from '../common/loading-overlay.jsx';
 import MyToastr from "../common/toastr/myToastr.jsx";
 
+//App Components
 import AppService from '../app/service/app-service.jsx';
 import AppContext from '../app/context/app-context.jsx';
 
+import ChangeRequestService from './service/change-request-service.jsx';
+
+//Form Components
 import ChangeRequestForm from './component/change-request-form.jsx';
 
 class ChangeRequest extends React.Component {
     constructor(props) {
         super(props);
+
+        this.parsley;
 
         this.state = {
             loading: false,
@@ -21,7 +27,7 @@ class ChangeRequest extends React.Component {
         };
 
         // 'this' bindings
-
+        this.handlerSave = this.handlerSave.bind(this);
     }
 
     componentDidMount() {
@@ -50,6 +56,23 @@ class ChangeRequest extends React.Component {
 
     }
 
+    handlerSave(obj) {
+
+        //if validations are not initialized then we call parsley on the form
+        if (this.parsley === undefined) {
+            this.parsley = $("#editForm").parsley();
+        }
+
+        //Validate the form
+        this.parsley.validate();
+
+        //if it is valid then we can continue
+        if (this.parsley.isValid() && obj) {
+            ChangeRequestService.save(this.props.api, obj, (message) => console.log(message));
+        }
+
+    }
+
     render() {
 
         var context = {
@@ -63,7 +86,7 @@ class ChangeRequest extends React.Component {
                     <React.Fragment>
                         <MyToastr />
                         <AppContext.Provider value={context}>
-                            <ChangeRequestForm  />
+                            <ChangeRequestForm onSave={(changerequest) => this.handlerSave(changerequest)} />
                         </AppContext.Provider>
                     </React.Fragment> : ''}
             </LoadingOverlay>

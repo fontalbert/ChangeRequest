@@ -120,6 +120,9 @@
   <data name="btnBack" xml:space="preserve">
     <value>Back to Grid</value>
   </data>
+  <data name="btnSave" xml:space="preserve">
+    <value>Save</value>
+  </data>
   <data name="lblDescription" xml:space="preserve">
     <value>Description</value>
   </data>

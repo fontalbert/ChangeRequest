@@ -5,6 +5,7 @@ import React from 'react';
 import MyToastr from '../../common/toastr/myToastr.jsx';
 import AppContext from '../../app/context/app-context.jsx';
 
+
 //Models
 import ChangeRequest from '../model/change-request.jsx';
 
@@ -12,12 +13,14 @@ import ChangeRequest from '../model/change-request.jsx';
 import TextBox from '../../common/form/textbox.jsx';
 import DateTime from '../../common/form/datetime.jsx';
 import ComboSelector from '../../common/form/combo-selector.jsx';
+import OkButton from '../../common/form/ok-button.jsx';
 
 
 export default class ChangeRequestForm extends React.Component {
     constructor(props) {
         super(props);
-       
+
+
         //this.changeRequest = new ChangeRequest();
         this.status = [
             { text: 'Select an option', value: '' },
@@ -63,7 +66,7 @@ export default class ChangeRequestForm extends React.Component {
                 {this.state.changeRequest ?
                     <form id="editForm" className="row">
                         <div className="col-md-6">
-                            <ComboSelector label={this.context.resources.lblStatus} 
+                            <ComboSelector label={this.context.resources.lblStatus} required
                                 options={this.status} onChange={(value) =>
                                     this.setState({
                                         changeRequest: {
@@ -72,7 +75,7 @@ export default class ChangeRequestForm extends React.Component {
                                         }
                                 })}
                             />
-                            <TextBox label={this.context.resources.lblTitle}
+                            <TextBox label={this.context.resources.lblTitle} required
                                 onChange={(value) => this.setState({
                                     changeRequest: {
                                         ...this.state.changeRequest,
@@ -106,7 +109,7 @@ export default class ChangeRequestForm extends React.Component {
                                     }
                                 })}
                             />
-                            <DateTime label={this.context.resources.lblRequestDate}
+                            <DateTime label={this.context.resources.lblRequestDate} required
                                 locale="en-ie" format='Date' onChange={(value) => this.setState({
                                     changeRequest: {
                                         ...this.state.changeRequest,
@@ -114,7 +117,7 @@ export default class ChangeRequestForm extends React.Component {
                                     }
                                 })} 
                             />
-                            <TextBox label={this.context.resources.lblRequestBy} 
+                            <TextBox label={this.context.resources.lblRequestBy} required
                                 onChange={(value) => this.setState({
                                     changeRequest: {
                                         ...this.state.changeRequest,
@@ -122,7 +125,7 @@ export default class ChangeRequestForm extends React.Component {
                                     }
                                 })}
                             />
-                            <ComboSelector label={this.context.resources.lblPriority}
+                            <ComboSelector label={this.context.resources.lblPriority} required
                                 options={this.priority} onChange={(value) => this.setState({
                                     changeRequest: {
                                         ...this.state.changeRequest,
@@ -133,6 +136,7 @@ export default class ChangeRequestForm extends React.Component {
                         </div>
 
                         <div className="col-md-12">
+                            <OkButton label={this.context.resources.btnSave} onClick={() => this.props.onSave(this.state.changeRequest)} /> {' '}
                             <a href={this.context.mainUrl} className="btn btn-default">{this.context.resources.btnBack}</a>
                         </div>
                         {JSON.stringify(this.state.changeRequest)}
