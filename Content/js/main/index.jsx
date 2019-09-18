@@ -7,7 +7,11 @@ import LoadingOverlay from '../common/loading-overlay.jsx';
 import MyToastr from "../common/toastr/myToastr.jsx";
 
 import AppService from "../app/service/app-service.jsx";
+import MainService from './services/main-service.jsx';
+
 import AppContext from '../app/context/app-context.jsx';
+
+import ChangeRequestGrid from './components/change-request-grid.jsx';
 
 
 
@@ -17,7 +21,8 @@ class Main extends React.Component {
 
         this.state = {
             loading: false,
-            resources: null
+            resources: null,
+            list: []
         };
 
         // 'this' bindings
@@ -41,6 +46,14 @@ class Main extends React.Component {
                         this.setState({ loading: false });
                         MyToastr.error(error);
                     });
+
+                MainService.getList(this.props.api,
+                    //Success function
+                    (list) => this.setState({ list }),
+                    //Fails function
+                    (error) => {
+                        MyToastr.error(error);
+                    });
             });
         }
     }
@@ -52,7 +65,6 @@ class Main extends React.Component {
             resources: this.state.resources
         };
 
-        console.log(this.state.resources);
 
         return (
             <LoadingOverlay status={loading}>
@@ -60,8 +72,8 @@ class Main extends React.Component {
                     <React.Fragment>
                         <MyToastr />
                         <AppContext.Provider value={context}>
-                            <h1>{this.state.resources.SayHello}</h1>
                             <a className="btn btn-default" href={this.props.changerequestUrl}>Add New Change Request</a>
+                            <ChangeRequestGrid list={this.state.list} />
                         </AppContext.Provider>
                     </React.Fragment> : ''}
             </LoadingOverlay>
