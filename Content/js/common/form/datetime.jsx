@@ -30,7 +30,7 @@ export default class DateTime extends React.Component {
             <div className="form-group">
                 {this.props.label ?
                     <label className="control-label">{this.props.label}</label> : ''}
-                <Datetime dateFormat={dateFormat} timeFormat={timeFormat} locale="en-ie"
+                <Datetime dateFormat={dateFormat} timeFormat={timeFormat} locale={this.props.locale}
                     onChange={(date) => this.props.onChange(date)} value={this.props.value}
                     inputProps={{ readOnly: true, "data-parsley-required": (this.props.required === true) }} />
             </div>
