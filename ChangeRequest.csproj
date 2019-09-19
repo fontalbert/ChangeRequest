@@ -287,6 +287,7 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ModuleContext.cs</LastGenOutput>
     </Content>
+    <None Include="Installation\01.00.00.SqlDataProvider" />
     <Content Include="Installation\ChangeRequest.dnn">
       <SubType>Designer</SubType>
     </Content>
@@ -327,7 +328,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Web.config" />
-    <Content Include="Installation\01.00.00.SqlDataProvider.sql" />
+    <Content Include="Installation\SQLVersions\01.00.00.SqlDataProvider.sql" />
     <None Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

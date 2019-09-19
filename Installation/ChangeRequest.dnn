@@ -1,6 +1,6 @@
 <dotnetnuke type="Package" version="5.0">
   <packages>
-    <package name="Margin.ChangeRequest" type="Module" version="00.00.01">
+    <package name="Margin.ChangeRequest" type="Module" version="01.00.00">
       <friendlyName>ChangeRequest</friendlyName>
       <description>ChangeRequest</description>
       <owner>
@@ -69,6 +69,11 @@
               <name>00.00.01.SqlDataProvider</name>
               <version>00.00.01</version>
             </script>
+            <script type="Install">
+              <path>Installation</path>
+              <name>01.00.00.SqlDataProvider</name>
+              <version>01.00.00</version>
+            </script>
             <script type="Uninstall">
               <path>Installation</path>
               <name>Uninstall.SqlDataProvider</name>
@@ -90,7 +95,7 @@
             <assembly>
               <path>bin</path>
               <name>Margin.Modules.ChangeRequest.dll</name>
-              <version>0.0.1</version>
+              <version>1.0.0</version>
             </assembly>
           </assemblies>
         </component>
