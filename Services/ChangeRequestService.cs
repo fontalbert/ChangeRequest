@@ -69,7 +69,7 @@ namespace Margin.Modules.ChangeRequest.Services
             ChangeRequestDTO changerequest = new ChangeRequestDTO(); 
             using (var ctx = new ModuleContext())
             {
-                 changerequest = ctx.ChangeRequest.Where((x) => x.Id == id).Select(o => new ChangeRequestDTO {
+                 changerequest = ctx.ChangeRequest.Where((x) => x.Id == id).ToList().Select(o => new ChangeRequestDTO {
                      Id = o.Id,
                      Title = o.Title,
                      Description = o.Description,

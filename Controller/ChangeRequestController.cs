@@ -50,7 +50,7 @@ namespace Margin.Modules.ChangeRequest.Controller
             }
         }
 
-        [HttpPost]
+        [HttpGet]
         [DnnAuthorize]
         public HttpResponseMessage Get(int id)
         {

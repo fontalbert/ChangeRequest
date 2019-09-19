@@ -64,7 +64,7 @@ export default class ChangeRequestForm extends React.Component {
             if (this.context.changeRequestId) {
                 ChangeRequestService.get(this.context.api, this.context.changeRequestId,
                     (obj) => {
-                        console.log(success);
+                        console.log(obj);
                         this.setState({ changeRequest: ChangeRequest.Create(obj) });
                     },
                     (fails) => console.log(fails)
@@ -79,7 +79,7 @@ export default class ChangeRequestForm extends React.Component {
     }
 
     render() {
-        console.log(this.context);
+        //console.log(this.context);
         return (
             <React.Fragment>
                 <MyToastr />

@@ -16,8 +16,14 @@ export default class ChangeRequestService {
 
     static get(api, id, success, fails) {
         //console.log("Edit: " + id);
-        $.get(`${api}ChangeRequest/Get`, id).done((response) => {
-            success(response.changerequest);
+        $.get(`${api}ChangeRequest/Get`, { id }).done((response) => {
+
+            let obj = response.changerequest;
+
+            //Fix the issue with the moment Data object. Backend can't be read moment objects.
+            obj.RequestDate = moment(obj.RequestDate, "DD-MM-YYYY", 'ie');
+            //console.log(obj.RequestDate);
+            success(obj);
         }).fail((error) => {
             //console.log(error.responseJSON.Message);
             fails(error.responseJSON.Message);
