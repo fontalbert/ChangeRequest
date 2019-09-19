@@ -11,6 +11,7 @@ export default class ChangeRequest {
         this.RequestBy = '';
         this.Status = '';
         this.Priority = '';
+        this.NewColumn = '';
     }
 
     static Create(data) {

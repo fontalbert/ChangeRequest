@@ -72,7 +72,7 @@ class ChangeRequest extends React.Component {
         if (this.parsley.isValid() && obj) {
             ChangeRequestService.save(this.props.api, obj,
                 (success) => {
-                    console.log(success);
+                    
                     //If we are updating an exisiting "change request" from the grid
                     //We should back to the grid after update
                     if (this.props.changeRequestId) {

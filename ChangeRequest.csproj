@@ -292,6 +292,7 @@
     </Content>
     <Content Include="Installation\00.00.01.SqlDataProvider" />
     <Content Include="Installation\Project.targets" />
+    <Content Include="Installation\Snippets\1. Basic templates for sql scripts.sql" />
     <Content Include="Installation\Uninstall.SqlDataProvider" />
     <Content Include="module.scss" />
     <Content Include="package.json" />
@@ -326,6 +327,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Web.config" />
+    <Content Include="Installation\01.00.00.SqlDataProvider.sql" />
     <None Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

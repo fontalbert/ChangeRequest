@@ -22,5 +22,6 @@ namespace Margin.Modules.ChangeRequest.Data
         public int LMUser { get; set; }
         public string LMDate { get; set; }
         public string LMIP { get; set; }
+        public string NewColumn { get; set; }
     }
 }

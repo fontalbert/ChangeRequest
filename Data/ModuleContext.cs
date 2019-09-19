@@ -638,6 +638,12 @@ namespace Margin.Modules.ChangeRequest.Data
         public string LMIP { get; set; } // LMIP (length: 50)
 
 
+        [MaxLength(150)]
+        [StringLength(150)]
+        [Display(Name = "New column")]
+        public string NewColumn { get; set; } // NewColumn (length: 150)
+
+
 
 
 
@@ -835,6 +841,8 @@ namespace Margin.Modules.ChangeRequest.Data
             Property(x => x.LMDate).HasColumnName(@"LMDate").HasColumnType("datetime");
 
             Property(x => x.LMIP).HasColumnName(@"LMIP").HasColumnType("nvarchar");
+
+            Property(x => x.NewColumn).HasColumnName(@"NewColumn").HasColumnType("nvarchar").IsOptional();
 
 
 
