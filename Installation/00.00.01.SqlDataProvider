@@ -1,1 +1,23 @@
 ﻿
+CREATE TABLE [dbo].[Arv_ChangeRequest](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Title] [nvarchar](150) NOT NULL,
+	[Description] [nvarchar](max) NULL,
+	[Justification] [nvarchar](max) NULL,
+	[Impact] [nvarchar](max) NULL,
+	[RequestDate] [datetime] NOT NULL,
+	[RequestBy] [nvarchar](50) NOT NULL,
+	[Status] [nvarchar](20) NOT NULL,
+	[Priority] [nvarchar](20) NOT NULL,
+	[CRUser] [int] NOT NULL,
+	[CRDate] [datetime] NOT NULL,
+	[CRIP] [nvarchar](50) NOT NULL,
+	[LMUser] [int] NOT NULL,
+	[LMDate] [datetime] NOT NULL,
+	[LMIP] [nvarchar](50) NOT NULL
+ CONSTRAINT [PK_Arv_ChangeRequest] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
