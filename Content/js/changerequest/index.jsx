@@ -73,7 +73,15 @@ class ChangeRequest extends React.Component {
             ChangeRequestService.save(this.props.api, obj,
                 (success) => {
                     console.log(success);
-                    this.setState({ restartForm: this.state.restartForm + 1 });
+                    //If we are updating an exisiting "change request" from the grid
+                    //We should back to the grid after update
+                    if (this.props.changeRequestId) {
+                        window.location = this.props.mainUrl;
+                    }
+                    //if we are adding a new "change request" to the DB, we should reset the form ready to add a new item
+                    else {
+                        this.setState({ restartForm: this.state.restartForm + 1 });
+                    }
                 },
                 (fails) => console.log(fails)
             );
