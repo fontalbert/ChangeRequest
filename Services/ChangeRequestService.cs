@@ -44,6 +44,7 @@ namespace Margin.Modules.ChangeRequest.Services
                     cr.RequestDate = requestDate;
                     cr.Status = obj.Status;
                     cr.Priority = obj.Priority;
+                    cr.NewColumn = obj.NewColumn;
 
                     cr.LMUser = Utils.GetUserId();
                     cr.LMDate = DateTime.Now;
@@ -78,7 +79,8 @@ namespace Margin.Modules.ChangeRequest.Services
                      Status = o.Status,
                      Priority = o.Priority,
                      RequestDate = o.RequestDate.ToString("dd/MM/yyyy"),
-                     RequestBy = o.RequestBy
+                     RequestBy = o.RequestBy,
+                     NewColumn = o.NewColumn
                  }).FirstOrDefault();
 
             }
@@ -112,7 +114,8 @@ namespace Margin.Modules.ChangeRequest.Services
                     Status = o.Status,
                     Priority = o.Priority,
                     RequestDate = o.RequestDate.ToString("dd/MM/yyyy"),
-                    RequestBy = o.RequestBy
+                    RequestBy = o.RequestBy,
+                    NewColumn = o.NewColumn
                 }).ToList();
             }
 
