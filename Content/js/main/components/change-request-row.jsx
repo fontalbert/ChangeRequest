@@ -17,7 +17,8 @@ export default class ChangeRequestRow extends React.Component {
                 <td className="item3">{this.props.value.Priority}</td>
                 <td className="item4">{this.props.value.RequestDate}</td>
                 <td className="item5">{this.props.value.RequestBy}</td>
-                <td className="item6">
+                <td className="item6">{this.props.value.NewColumn}</td>
+                <td className="item7">
                     <i className="glyphicon glyphicon-edit" onClick={() => this.props.onEditRow(this.props.value)} />
                     <i className="glyphicon glyphicon-trash" onClick={() => this.props.onDeleteRow(this.props.value)}/></td>
             </tr>

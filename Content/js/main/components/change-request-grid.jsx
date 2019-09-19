@@ -29,6 +29,7 @@ export default class ChangeRequestGrid extends React.Component {
                         <th>Priority</th>
                         <th>Request Date</th>
                         <th>Request By</th>
+                        <th>New Column</th>
                         <th>Actions</th>
                     </tr>
                 </thead>

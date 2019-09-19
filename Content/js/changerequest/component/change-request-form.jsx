@@ -161,6 +161,15 @@ export default class ChangeRequestForm extends React.Component {
                                 })}
                                 value={this.state.changeRequest.Priority}
                             />
+                            <TextBox label={this.context.resources.lblNewColumn} required
+                                onChange={(value) => this.setState({
+                                    changeRequest: {
+                                        ...this.state.changeRequest,
+                                        NewColumn: value
+                                    }
+                                })}
+                                value={this.state.changeRequest.NewColumn}
+                            />
                         </div>
 
                         <div className="col-md-12">

@@ -132,6 +132,9 @@
   <data name="lblJustification" xml:space="preserve">
     <value>Justification</value>
   </data>
+  <data name="lblNewColumn" xml:space="preserve">
+    <value>New Column</value>
+  </data>
   <data name="lblPriority" xml:space="preserve">
     <value>Priority</value>
   </data>
